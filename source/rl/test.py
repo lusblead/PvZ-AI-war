@@ -47,7 +47,6 @@ def main():
     # render_mode='human' 会弹出 Pygame 窗口
     plant_opponent = ScriptedPlantPolicy()
     env = ZombiePvZEnv(plant_policy=plant_opponent, render_mode='human')
-
     # 4. 开始游戏循环
     obs, _ = env.reset()
 
