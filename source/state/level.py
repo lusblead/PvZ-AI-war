@@ -122,17 +122,9 @@ class Level(tool.State):
 
         if self.bar_type == c.CHOOSEBAR_STATIC:
             # 强制使用固定卡槽并确保为静态卡槽（禁用传送带）
-            fixed_card_defs = [
-                {"name": "Peashooter"},
-                {"name": "SnowPea"},
-                {"name": "WallNut"},
-                {"name": "CherryBomb"},
-                {"name": "RepeaterPea"},
-                {"name": "Chomper"},
-                {"name": "PotatoMine"}
-            ]
+            fixed_card_list = [0, 1, 2, 3, 4, 5, 6, 8]
 
-            self.initPlay(fixed_card_defs)
+            self.initPlay(fixed_card_list)
         else:
             card_pool = menubar.getCardPool(self.map_data[c.CARD_POOL])
             self.initPlay(card_pool)
