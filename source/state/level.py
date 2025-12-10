@@ -1,4 +1,7 @@
 __author__ = 'marble_xu'
+# 在文件顶部添加导入
+import numpy as np
+from ..rl_agent import DQNAgent
 
 import os
 import json
@@ -10,6 +13,14 @@ from ..component import map, plant, zombie, menubar
 class Level(tool.State):
     def __init__(self):
         tool.State.__init__(self)
+        # 初始化强化学习智能体
+        self.state_size = 32  # 状态维度：根据实际情况调整
+        self.action_size = 45  # 9列×5行的网格位置
+        self.agent = DQNAgent(self.state_size, self.action_size)
+        self.episode = 0
+        self.max_episodes = 5000  # 训练轮数
+        self.episode_reward = 0
+        self.zombies_entered_house = False
 
     def startup(self, current_time, persist):
         self.game_info = persist
@@ -17,6 +28,9 @@ class Level(tool.State):
         self.game_info[c.CURRENT_TIME] = current_time
         self.map_y_len = c.GRID_Y_LEN
         self.map = map.Map(c.GRID_X_LEN, self.map_y_len)
+        self.agent.reset_reward_tracking()
+        self.episode_reward = 0
+        self.zombies_entered_house = False
 
         self.loadMap()
         self.setupBackground()
