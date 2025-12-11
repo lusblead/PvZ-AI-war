@@ -164,7 +164,7 @@ class ZombiePvZEnv(gym.Env):  # 定义僵尸方强化学习环境，继承自gym
         reward = self._calculate_reward(valid_action)  # 计算奖励
         terminated = self._check_game_over()  # 检查游戏是否因胜负结束
 
-        # 【关键修改】设置 truncated 为 60秒。缩短单局时间，加快训练反馈循环
+
         truncated = self.time_seconds >= 300
 
         return self._get_obs(), reward, terminated, truncated, {}  # 返回 (观测, 奖励, 终止, 截断, 信息)
